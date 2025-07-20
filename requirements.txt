@@ -3,3 +3,4 @@ uvicorn
 markitdown[all]
 python-docx
 fpdf
+python-multipart
