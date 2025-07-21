@@ -1,6 +1,8 @@
 fastapi
-uvicorn
+uvicorn[standard]
+python-multipart
 markitdown[all]
 python-docx
 fpdf
-python-multipart
+html2text
+beautifulsoup4
