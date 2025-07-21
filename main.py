@@ -40,3 +40,20 @@ async def convert_from_json(request: ConvertRequest):
         media_type=result["media_type"],
         headers={"Content-Disposition": f"attachment; filename={result['filename']}"}
     )
+
+@app.post("/convert-form/")
+async def convert_from_form(
+    code: str = Form(...),
+    output_format: str = Form(...)
+):
+    if output_format not in ["markdown", "pdf", "docx"]:
+        return {"error": "Unsupported format."}
+
+    html_bytes = code.encode('utf-8')
+    result = convert_html_to_format(html_bytes, output_format)
+
+    return StreamingResponse(
+        io.BytesIO(result["content"]),
+        media_type=result["media_type"],
+        headers={"Content-Disposition": f"attachment; filename={result['filename']}"}
+    )
